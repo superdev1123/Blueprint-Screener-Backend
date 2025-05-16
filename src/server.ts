@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import routes from './routes/index';
+import ScreenerRoutes from './routes/ScreenerRoutes';
+import ScoreRoutes from './routes/ScoreRoutes';
 
 dotenv.config({ path: __dirname + '/.env' });
 
@@ -11,8 +12,11 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-app.use('/', routes);
+app.use('/screener', ScreenerRoutes);
+app.use('/score', ScoreRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
+export default app;
