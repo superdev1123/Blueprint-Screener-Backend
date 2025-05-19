@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import domainMapping from '../mockup/DomainMapping';
+import { Request, Response } from "express";
+import domainMapping from "../mockup/DomainMapping";
 
 export const calcScore = (req: Request, res: Response) => {
   const { answers } = req.body;
@@ -15,11 +15,16 @@ export const calcScore = (req: Request, res: Response) => {
     if (typeof question_id !== "string" || typeof value !== "number") {
       return res.status(400).json({ error: "Invalid answer format" });
     }
-    const domainEntry = domainMapping.find(d => d.question_id === question_id);
+    const domainEntry = domainMapping.find(
+      (d) => d.question_id === question_id
+    );
     if (!domainEntry) {
-      return res.status(400).json({ error: `Unknown question_id: ${question_id}` });
+      return res
+        .status(400)
+        .json({ error: `Unknown question_id: ${question_id}` });
     }
-    domainScores[domainEntry.domain] = (domainScores[domainEntry.domain] || 0) + value;
+    domainScores[domainEntry.domain] =
+      (domainScores[domainEntry.domain] || 0) + value;
   }
 
   // Determine assessments to assign
